@@ -172,7 +172,7 @@
         turns += 1;
         orbit.style.setProperty('--rot', turns * 90 + 'deg');
         mark();
-      }, 3800);
+      }, 6500);
 
       ['mouseenter', 'focusin'].forEach(function (evt) {
         orbit.addEventListener(evt, function () { held = true; });
