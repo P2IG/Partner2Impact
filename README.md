@@ -85,34 +85,29 @@ not yet said where it should live on the homepage. Deleting Data as Currency is 
 hyper-targeting up to sit directly after Data + Strategy, which is where she asked for it —
 no reordering was needed, only the removal.
 
-### The orbital compass
+### Your CRM: Hidden Value
 
-The three pain cards (silent churn, hidden wealth, wasted hours) are replaced by four
-findings that **orbit** a central anchor, per Tracey's brief. Built in this site's own system
-rather than from the Tailwind blueprint she was given, which assumed a dark slate theme with
-blue and indigo accents and would have landed as a foreign object on a sand section.
+Four circles on the diagonals around a dashed centre, following Tracey's mock. The section
+headline is hers from that mock — it replaced "Your nonprofit is sitting on a goldmine of
+data", with the italic line under it as the standfirst. The paragraph she kept in the
+previous round still sits between that and the graphic.
 
-**How the rotation works.** `.orbit-ring` holds four slots pinned to the compass points of a
-square and turns 90° at a time; each card counter-rotates by the same amount, so it travels
-around the circle while its text stays upright. No text on a curve, no per-slot trigonometry.
-Whichever slot lands at the top is the active one — after `k` quarter turns that is the card
-whose index makes `(index + k) % 4` come out zero.
+**The radius is derived, not eyeballed.** She asked for the circles tighter around the
+middle, so it is half of each diameter plus a gap: change either size and the spacing
+follows. The first pass at that gap was 1rem, which pulled the circles in far enough to
+swallow the spokes — tight was right, invisible connectors were not.
 
-**The cards sit on the dashed path rather than outside it.** That is what keeps the geometry
-radially symmetric: an outward offset would have to point in a different direction for each
-slot and would break the moment the ring turned. Each card paints the section's own
-background, so the path stops cleanly at its edge instead of running under the words. The
-first version put a node dot on the path too; there is nowhere to put it that the card does
-not cover, so the active state is colour, an accent rule and a little scale instead.
+**The spokes are one static X through the middle.** Because the layout is four-fold
+symmetric it looks identical at every quarter turn, so it never needs to rotate; the centre
+circle and the four cards are opaque and sit above it, and that is what trims the X down to
+four connector segments without any clipping.
 
-**It pauses on hover and on focus,** and stops entirely under `prefers-reduced-motion`,
-leaving a static diamond with the first card active. A carousel that keeps moving while
-someone is reading it is worse than one that never moves, and the pause is what makes an
-auto-rotating panel acceptable rather than merely fashionable.
+The ring still turns a quarter at a time with each card counter-rotating to stay upright, it
+pauses on hover and focus, and `prefers-reduced-motion` stops it. The card in the top-left —
+where reading starts — is the active one. Below 60rem four circles no longer fit around a
+centre, so it becomes a list: the anchor first, then the four in reading order.
 
-Lapse risk is amber, matching what amber means everywhere else here — the one signal that is
-a loss rather than an opportunity. Below 56rem a compass stops reading as one, so it becomes
-a list: anchor first, then the four findings in the order Tracey asked for.
+Lapse risk keeps the amber mark, matching what amber means everywhere else here.
 
 ### The mailing list
 
@@ -321,7 +316,12 @@ repository setting change, not a code change.
 ## Booking, and the form that used to be here
 
 `/contact` no longer asks questions. It embeds **Calendly's inline widget** and the visitor
-picks a slot directly. Email sits under the calendar. **Every other page carries `.book-fab`, a plain link to the booking page.** It replaced
+picks a slot directly. Email sits under the calendar. **On a phone `.book-fab` drops its label and becomes a circle.** A fixed control covers
+whatever is under it at some scroll position, and at full width it was landing across a card
+heading on the homepage; icon-only is a quarter of the area. The words stay in the
+accessibility tree, so it still announces itself as "Book 15 minutes".
+
+**Every other page carries `.book-fab`, a plain link to the booking page.** It replaced
 Calendly's floating badge, which cost a third-party script and its cookies on all eight pages
 — including `/privacy` and `/terms` — to save a single click, on a site whose privacy policy
 leads with having none of that. A plain link buys back the whole exposure and works with
