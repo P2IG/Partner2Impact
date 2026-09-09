@@ -1170,18 +1170,36 @@ strong { font-weight: 650; }
    where reading starts — is the active one.
    -------------------------------------------------------------------------- */
 
+/* A second header under the h2 rather than a tagline, so it carries weight of
+   its own. Sized between h2 and h3: clearly subordinate, clearly a heading. */
 .orbit-standfirst {
-  font-family: var(--font-display);
-  font-size: clamp(1rem, 0.92rem + 0.4vw, 1.2rem);
-  font-style: italic;
-  font-weight: 600;
-  color: var(--slate-500);
-  margin-top: -0.35rem;
+  font-size: clamp(1.35rem, 1.1rem + 1.15vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  margin: 0;
 }
 
+/* The narrative runs the full shell width. Long measures only work at size, so
+   the type steps up with the width and the closing claim is set in navy — that
+   is what makes it read as a lead and not as body text stretched thin. */
+.orbit-lead {
+  max-width: none;
+  margin: clamp(1.25rem, 1rem + 1vw, 1.9rem) 0 0;
+  padding-left: clamp(0.9rem, 0.5rem + 1.4vw, 1.6rem);
+  border-left: 4px solid var(--teal);
+  font-size: clamp(1.08rem, 0.98rem + 0.7vw, 1.45rem);
+  line-height: 1.55;
+  color: var(--slate-700);
+  text-wrap: pretty;
+}
+.orbit-lead strong { color: var(--ink); font-weight: 700; }
+
+.section-head--tight { margin-bottom: 0; }
+
 .orbit {
-  --orbit-card: clamp(9.5rem, 6rem + 11vw, 15rem);
-  --orbit-core: clamp(7rem, 5rem + 7vw, 10.5rem);
+  --orbit-card: clamp(9.5rem, 6rem + 13vw, 17rem);
+  --orbit-core: clamp(7rem, 5rem + 7.5vw, 11.5rem);
   /* Enough of a gap that the spokes read as connectors. At 1rem the circles
      were tight enough to swallow them, which loses the line the mock draws
      from the centre to each one. */
@@ -1230,7 +1248,14 @@ strong { font-weight: 650; }
 .orbit-slot--c { left: 100%; top: 100%; }
 .orbit-slot--d { left: 0;    top: 100%; }
 
+/* Each circle carries its own hue, set once here and read by the border, the
+   fill and the mark. --c is the ring; --c-soft is the fill, kept pale enough
+   that body copy kept its contrast rather than trading legibility for colour.
+   The hue travels with the concept, so a card keeps it as the ring turns. */
 .orbit-card {
+  --c: var(--teal);
+  --c-soft: #e6f2f8;
+
   position: absolute;
   left: 0;
   top: 0;
@@ -1239,25 +1264,31 @@ strong { font-weight: 650; }
   display: grid;
   place-content: center;
   gap: 0.3rem;
-  padding: 12%;
+  /* A length, not a percentage: the card is absolutely positioned inside a
+     zero-width slot, so percentage padding resolves against 0 and silently
+     does nothing. Derived from the card so it scales with it. */
+  padding: calc(var(--orbit-card) * 0.15);
   border-radius: 50%;
-  background: var(--sand);
-  border: 1px solid var(--line);
+  background: var(--c-soft);
+  border: 2px solid var(--c);
   text-align: center;
   /* Un-turn the card, then centre it on the corner point. */
   transform: translate(-50%, -50%) rotate(calc(-1 * var(--rot)));
   transition: transform 1.1s cubic-bezier(0.65, 0, 0.35, 1),
-              border-color 0.5s var(--ease);
+              box-shadow 0.5s var(--ease);
 }
 
+.orbit-card--capacity  { --c: var(--navy-700); --c-soft: #eaeef7; }
+.orbit-card--upgrade   { --c: var(--teal);     --c-soft: #e6f2f8; }
+.orbit-card--prospects { --c: #2f96bb;         --c-soft: #ecf7fb; }
+.orbit-card--risk      { --c: var(--amber);    --c-soft: #fdefe7; }
+
 .orbit-mark {
-  width: clamp(15px, 12px + 0.5vw, 19px);
-  height: clamp(15px, 12px + 0.5vw, 19px);
-  margin: 0 auto 0.15rem;
-  color: var(--teal);
-  transition: color 0.5s var(--ease);
+  width: clamp(19px, 14px + 0.7vw, 25px);
+  height: clamp(19px, 14px + 0.7vw, 25px);
+  margin: 0 auto 0.25rem;
+  color: var(--c);
 }
-.orbit-card--risk .orbit-mark { color: var(--amber); }
 
 .orbit-card h3 {
   font-size: clamp(0.82rem, 0.74rem + 0.3vw, 1rem);
@@ -1274,14 +1305,14 @@ strong { font-weight: 650; }
   text-wrap: pretty;
 }
 
-/* Top-left is where reading starts, so that is the one held up. */
+/* Top-left is where reading starts, so that is the one held up. The lit state
+   is a halo in the card's own colour plus a lift — not a text-colour change,
+   which would have to clear AA at the small sizes these labels run at. */
 .orbit-slot.is-active .orbit-card {
-  border-color: rgba(9, 109, 145, 0.45);
-  box-shadow: 0 8px 24px rgba(6, 30, 79, 0.09);
+  box-shadow: 0 10px 28px rgba(6, 30, 79, 0.12);
+  box-shadow: 0 0 0 7px color-mix(in srgb, var(--c) 18%, transparent),
+              0 10px 28px rgba(6, 30, 79, 0.12);
 }
-.orbit-slot.is-active .orbit-card h3 { color: var(--teal-600); }
-.orbit-slot.is-active .orbit-card--risk { border-color: rgba(207, 71, 3, 0.45); }
-.orbit-slot.is-active .orbit-card--risk h3 { color: var(--amber-600); }
 
 .orbit-core {
   position: absolute;
@@ -1296,8 +1327,18 @@ strong { font-weight: 650; }
   padding: 1rem;
   border-radius: 50%;
   text-align: center;
-  background: var(--sand);
-  border: 2px dashed var(--slate-300);
+  background: var(--navy);
+  border: 0;
+}
+/* The mock's dashed circle, kept as a ring outside the solid core rather than
+   as its edge — the source of the data reads as solid, still marked as the
+   part nobody has opened yet. */
+.orbit-core::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border: 2px dashed rgba(6, 30, 79, 0.25);
+  border-radius: inherit;
 }
 .orbit-core__text {
   margin: 0;
@@ -1305,7 +1346,7 @@ strong { font-weight: 650; }
   font-size: clamp(0.95rem, 0.8rem + 0.6vw, 1.35rem);
   font-weight: 700;
   letter-spacing: -0.015em;
-  color: var(--ink);
+  color: #ffffff;
 }
 
 /* Below the width where four circles still fit around a centre, it becomes a
@@ -1342,12 +1383,11 @@ strong { font-weight: 650; }
   }
   .orbit-card h3 { font-size: 1.05rem; }
   .orbit-card p { font-size: 0.9rem; }
-  .orbit-slot.is-active .orbit-card {
-    border-color: var(--line);
-    box-shadow: none;
-  }
-  .orbit-slot.is-active .orbit-card h3 { color: var(--ink); }
-  .orbit-slot.is-active .orbit-card--risk h3 { color: var(--ink); }
+  .orbit-slot.is-active .orbit-card { box-shadow: none; }
+  /* The dashed ring is a diagram device for the orbit; in the stacked list
+     there is no centre for it to mark. It also has to go because a static
+     core would anchor it to .orbit and blow it up to the full list. */
+  .orbit-core::after { display: none; }
   .orbit-core {
     position: static;
     width: auto;
