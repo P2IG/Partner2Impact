@@ -140,50 +140,6 @@
   }
 
   /* ----------------------------------------------------------------------
-     Orbital compass
-
-     Turns the ring a quarter at a time; CSS counter-rotates each card so the
-     text stays upright while it travels. Whichever slot lands at the top is
-     the active one — after k quarter turns that is the card whose index makes
-     (index + k) % 4 come out zero.
-
-     It pauses on hover and on focus. A carousel that keeps moving while
-     someone is reading it is worse than one that does not move at all, and
-     the pause is what makes an auto-rotating panel acceptable rather than
-     merely fashionable. prefers-reduced-motion stops it entirely, leaving the
-     diamond static with the first card active.
-     ---------------------------------------------------------------------- */
-  var orbit = document.querySelector('[data-orbit]');
-  if (orbit) {
-    var slots = Array.prototype.slice.call(orbit.querySelectorAll('.orbit-slot'));
-    var turns = 0;
-
-    var mark = function () {
-      slots.forEach(function (slot, i) {
-        slot.classList.toggle('is-active', (i + turns) % slots.length === 0);
-      });
-    };
-    mark();
-
-    if (!reduceMotion && slots.length) {
-      var held = false;
-      setInterval(function () {
-        if (held || document.hidden) return;
-        turns += 1;
-        orbit.style.setProperty('--rot', turns * 90 + 'deg');
-        mark();
-      }, 6500);
-
-      ['mouseenter', 'focusin'].forEach(function (evt) {
-        orbit.addEventListener(evt, function () { held = true; });
-      });
-      ['mouseleave', 'focusout'].forEach(function (evt) {
-        orbit.addEventListener(evt, function () { held = false; });
-      });
-    }
-  }
-
-  /* ----------------------------------------------------------------------
      Booking calendar status
 
      The widget markup and its script live in contact.html so the browser can
