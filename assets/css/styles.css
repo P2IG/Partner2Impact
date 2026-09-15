@@ -1200,8 +1200,8 @@ strong { font-weight: 650; }
 .section-head--tight { margin-bottom: 0; }
 
 .pulse {
-  margin-top: clamp(2rem, 1.5rem + 2vw, 3.25rem);
-  padding: clamp(1.75rem, 1rem + 3vw, 3.25rem) clamp(1rem, 0.4rem + 2vw, 2.5rem);
+  margin-top: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem);
+  padding: clamp(1.25rem, 0.8rem + 2vw, 2.5rem);
   border-radius: var(--radius-lg);
   background:
     radial-gradient(38rem 26rem at 50% 50%, rgba(14, 134, 176, 0.20), transparent 70%),
@@ -1211,8 +1211,8 @@ strong { font-weight: 650; }
 .pulse-stage {
   position: relative;
   width: 100%;
-  max-width: 62rem;
-  aspect-ratio: 100 / 72;
+  max-width: 70rem;
+  aspect-ratio: 100 / 48;
   margin-inline: auto;
   container-type: inline-size;
 }
@@ -1236,17 +1236,17 @@ strong { font-weight: 650; }
 .pulse-svg .ping:nth-of-type(3) { animation-delay: 2.4s; }
 @keyframes pulse-ring {
   0%   { transform: scale(1);   opacity: 0.32; }
-  100% { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
 }
 
 /* Each bead starts on the core's edge and runs most of the way out to its
    plate, fading as the plate takes over. --tx / --ty are the distance left to
    cover along that diagonal, in the SVG's own units. */
 .pulse-svg .bead { animation: pulse-travel 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-.pulse-svg .bead--capacity  { fill: #8fb0ff; --tx: -10.9px; --ty: -7.7px; }
-.pulse-svg .bead--upgrade   { fill: #57c9e8; --tx:  10.9px; --ty: -7.7px; animation-delay: 0.7s; }
-.pulse-svg .bead--prospects { fill: #9fe3f5; --tx:  10.9px; --ty:  7.7px; animation-delay: 1.4s; }
-.pulse-svg .bead--risk      { fill: #fb8c44; --tx: -10.9px; --ty:  7.7px; animation-delay: 2.1s; }
+.pulse-svg .bead--capacity  { fill: #8fb0ff; --tx: -10.85px; --ty: -5.08px; }
+.pulse-svg .bead--upgrade   { fill: #57c9e8; --tx:  10.85px; --ty: -5.08px; animation-delay: 0.7s; }
+.pulse-svg .bead--prospects { fill: #9fe3f5; --tx:  10.85px; --ty:  5.08px; animation-delay: 1.4s; }
+.pulse-svg .bead--risk      { fill: #fb8c44; --tx: -10.85px; --ty:  5.08px; animation-delay: 2.1s; }
 @keyframes pulse-travel {
   0%   { transform: translate(0, 0); opacity: 0; }
   12%  { opacity: 1; }
@@ -1260,7 +1260,7 @@ strong { font-weight: 650; }
 .pulse-card {
   position: absolute;
   width: 28%;
-  padding: 4.2cqw 2cqw 2.2cqw;
+  padding: 3cqw 2cqw 1.8cqw;
   transform: translate(-50%, -50%);
   text-align: center;
   background: #0b2149;
@@ -1269,25 +1269,25 @@ strong { font-weight: 650; }
   border-radius: var(--radius);
   z-index: 2;
 }
-.pulse-card--capacity  { left: 16%; top: 16.7%; --c: #8fb0ff; }
-.pulse-card--upgrade   { left: 84%; top: 16.7%; --c: #57c9e8; }
-.pulse-card--prospects { left: 84%; top: 83.3%; --c: #9fe3f5; }
-.pulse-card--risk      { left: 16%; top: 83.3%; --c: #fb8c44; }
+.pulse-card--capacity  { left: 15%; top: 15.83%; --c: #8fb0ff; }
+.pulse-card--upgrade   { left: 85%; top: 15.83%; --c: #57c9e8; }
+.pulse-card--prospects { left: 85%; top: 84.17%; --c: #9fe3f5; }
+.pulse-card--risk      { left: 15%; top: 84.17%; --c: #fb8c44; }
 
 .pulse-mark {
-  width: 2.6cqw;
-  height: 2.6cqw;
-  margin: 0 auto 1cqw;
+  width: 2.2cqw;
+  height: 2.2cqw;
+  margin: 0 auto 0.8cqw;
   color: var(--c);
 }
 .pulse-card h3 {
-  font-size: 1.85cqw;
+  font-size: 1.7cqw;
   line-height: 1.22;
-  margin-bottom: 0.6cqw;
+  margin-bottom: 0.5cqw;
   color: #ffffff;
 }
 .pulse-card p {
-  font-size: 1.42cqw;
+  font-size: 1.32cqw;
   line-height: 1.4;
   margin-bottom: 0;
   color: rgba(214, 228, 246, 0.82);
@@ -1299,7 +1299,7 @@ strong { font-weight: 650; }
   left: 50%;
   top: 50%;
   z-index: 3;
-  width: 18%;
+  width: 15%;
   aspect-ratio: 1;
   margin: 0;
   transform: translate(-50%, -50%);
@@ -1310,7 +1310,7 @@ strong { font-weight: 650; }
   text-align: center;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 2.1cqw;
+  font-size: 1.8cqw;
   letter-spacing: -0.015em;
   color: var(--navy);
   box-shadow: 0 0 0 0.6rem rgba(143, 176, 255, 0.10),
@@ -1325,17 +1325,17 @@ strong { font-weight: 650; }
     max-width: 34rem;
     aspect-ratio: auto;
     display: grid;
-    gap: clamp(0.9rem, 0.7rem + 1vw, 1.35rem);
+    gap: clamp(0.7rem, 0.6rem + 0.5vw, 1rem);
   }
   .pulse-svg { display: none; }
   .pulse-card {
     position: static;
     width: auto;
-    padding: 1.35rem 1.5rem;
+    padding: 1.15rem 1.35rem;
     transform: none;
     text-align: left;
   }
-  .pulse-mark { width: 22px; height: 22px; margin: 0 0 0.6rem; }
+  .pulse-mark { width: 20px; height: 20px; margin: 0 0 0.5rem; }
   .pulse-card h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
   .pulse-card p { font-size: 0.92rem; }
   .pulse-core {
@@ -1345,9 +1345,9 @@ strong { font-weight: 650; }
     aspect-ratio: auto;
     transform: none;
     justify-self: center;
-    padding: 0.7rem 1.75rem;
+    padding: 0.6rem 1.6rem;
     border-radius: 999px;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     box-shadow: 0 0 2.5rem rgba(87, 201, 232, 0.3);
   }
 }
