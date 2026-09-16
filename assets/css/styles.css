@@ -144,6 +144,11 @@ strong { font-weight: 650; }
 .section { padding-block: clamp(4rem, 2.5rem + 6vw, 7.5rem); }
 .section--tight { padding-block: clamp(3rem, 2rem + 4vw, 5rem); }
 .section--sand { background: var(--sand); }
+/* The gap between two stacked sections is two full section paddings — about
+   240px at desktop, which read as a hole. These trim the facing edges only, so
+   neither section loses its breathing room anywhere else. */
+.section--tight-bottom { padding-bottom: clamp(2.25rem, 1.5rem + 2.5vw, 3.75rem); }
+.section--tight-top { padding-top: clamp(2.25rem, 1.5rem + 2.5vw, 3.75rem); }
 .section--ink {
   background:
     radial-gradient(90rem 45rem at 78% -10%, rgba(14, 134, 176, 0.38), transparent 62%),
@@ -1182,17 +1187,17 @@ strong { font-weight: 650; }
   margin: 0;
 }
 
-/* The narrative runs the full shell width. Long measures only work at size, so
-   the type steps up with the width and the closing claim is set in navy — that
-   is what makes it read as a lead and not as body text stretched thin. */
+/* Centred under a centred heading. The left teal rule this used to carry read
+   as "aligned left" and fought the heading above it, so the emphasis moves to
+   the measure instead: held near 60 characters, because centred text is harder
+   to track back across than left-aligned text and long lines make that worse. */
 .crm-lead {
-  max-width: none;
-  margin: clamp(1.25rem, 1rem + 1vw, 1.9rem) 0 0;
-  padding-left: clamp(0.9rem, 0.5rem + 1.4vw, 1.6rem);
-  border-left: 4px solid var(--teal);
-  font-size: clamp(1.08rem, 0.98rem + 0.7vw, 1.45rem);
+  max-width: 52rem;
+  margin: clamp(1.25rem, 1rem + 1vw, 1.9rem) auto 0;
+  font-size: clamp(1.05rem, 0.98rem + 0.5vw, 1.28rem);
   line-height: 1.55;
   color: var(--slate-700);
+  text-align: center;
   text-wrap: pretty;
 }
 .crm-lead strong { color: var(--ink); font-weight: 700; }
@@ -1200,7 +1205,8 @@ strong { font-weight: 650; }
 .section-head--tight { margin-bottom: 0; }
 
 .pulse {
-  margin-top: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem);
+  max-width: 64rem;
+  margin: clamp(1.75rem, 1.25rem + 1.5vw, 2.5rem) auto 0;
   padding: clamp(1.25rem, 0.8rem + 2vw, 2.5rem);
   border-radius: var(--radius-lg);
   background:
@@ -1211,8 +1217,8 @@ strong { font-weight: 650; }
 .pulse-stage {
   position: relative;
   width: 100%;
-  max-width: 70rem;
-  aspect-ratio: 100 / 48;
+  max-width: 58rem;
+  aspect-ratio: 100 / 50;
   margin-inline: auto;
   container-type: inline-size;
 }
@@ -1243,10 +1249,10 @@ strong { font-weight: 650; }
    plate, fading as the plate takes over. --tx / --ty are the distance left to
    cover along that diagonal, in the SVG's own units. */
 .pulse-svg .bead { animation: pulse-travel 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
-.pulse-svg .bead--capacity  { fill: #8fb0ff; --tx: -10.85px; --ty: -5.08px; }
-.pulse-svg .bead--upgrade   { fill: #57c9e8; --tx:  10.85px; --ty: -5.08px; animation-delay: 0.7s; }
-.pulse-svg .bead--prospects { fill: #9fe3f5; --tx:  10.85px; --ty:  5.08px; animation-delay: 1.4s; }
-.pulse-svg .bead--risk      { fill: #fb8c44; --tx: -10.85px; --ty:  5.08px; animation-delay: 2.1s; }
+.pulse-svg .bead--capacity  { fill: #8fb0ff; --tx: -9.52px; --ty: -4.79px; }
+.pulse-svg .bead--upgrade   { fill: #57c9e8; --tx:  9.52px; --ty: -4.79px; animation-delay: 0.7s; }
+.pulse-svg .bead--prospects { fill: #9fe3f5; --tx:  9.52px; --ty:  4.79px; animation-delay: 1.4s; }
+.pulse-svg .bead--risk      { fill: #fb8c44; --tx: -9.52px; --ty:  4.79px; animation-delay: 2.1s; }
 @keyframes pulse-travel {
   0%   { transform: translate(0, 0); opacity: 0; }
   12%  { opacity: 1; }
@@ -1259,7 +1265,7 @@ strong { font-weight: 650; }
    The hue travels with the concept, so each finding keeps its own signal. */
 .pulse-card {
   position: absolute;
-  width: 28%;
+  width: 30%;
   padding: 3cqw 2cqw 1.8cqw;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -1269,25 +1275,25 @@ strong { font-weight: 650; }
   border-radius: var(--radius);
   z-index: 2;
 }
-.pulse-card--capacity  { left: 15%; top: 15.83%; --c: #8fb0ff; }
-.pulse-card--upgrade   { left: 85%; top: 15.83%; --c: #57c9e8; }
-.pulse-card--prospects { left: 85%; top: 84.17%; --c: #9fe3f5; }
-.pulse-card--risk      { left: 15%; top: 84.17%; --c: #fb8c44; }
+.pulse-card--capacity  { left: 16%; top: 15.8%; --c: #8fb0ff; }
+.pulse-card--upgrade   { left: 84%; top: 15.8%; --c: #57c9e8; }
+.pulse-card--prospects { left: 84%; top: 84.2%; --c: #9fe3f5; }
+.pulse-card--risk      { left: 16%; top: 84.2%; --c: #fb8c44; }
 
 .pulse-mark {
-  width: 2.2cqw;
-  height: 2.2cqw;
+  width: 2.4cqw;
+  height: 2.4cqw;
   margin: 0 auto 0.8cqw;
   color: var(--c);
 }
 .pulse-card h3 {
-  font-size: 1.7cqw;
+  font-size: 1.85cqw;
   line-height: 1.22;
   margin-bottom: 0.5cqw;
   color: #ffffff;
 }
 .pulse-card p {
-  font-size: 1.32cqw;
+  font-size: 1.42cqw;
   line-height: 1.4;
   margin-bottom: 0;
   color: rgba(214, 228, 246, 0.82);
@@ -1310,26 +1316,69 @@ strong { font-weight: 650; }
   text-align: center;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.8cqw;
+  font-size: 1.95cqw;
   letter-spacing: -0.015em;
   color: var(--navy);
   box-shadow: 0 0 0 0.6rem rgba(143, 176, 255, 0.10),
               0 0 3.5rem rgba(87, 201, 232, 0.35);
 }
 
-/* Below the width where four plates still fit around a centre, it becomes a
-   list: the source first, then the four, in reading order. */
+/* Below the width where four plates still fit around a centre, the graphic
+   becomes a waterfall rather than a plain list.
+
+   Tracey's note was that on a phone the CRM vanished and it "just lists the
+   thing" — the source, the order and the motion were all lost at exactly the
+   width most visitors arrive at. So the core stays: a lit circle at the top,
+   carrying its own rings, with the signal falling from it through each finding
+   in turn. Same idea as the desktop drawing, told down a column instead of
+   around a centre.
+
+   The channel above each plate is exactly as tall as the grid gap, which is
+   why both read from --fall. Change it once and the drawing stays joined up. */
 @media (max-width: 64rem) {
   .pulse-stage {
+    --fall: 1.9rem;
     width: auto;
-    max-width: 34rem;
+    max-width: 30rem;
     aspect-ratio: auto;
     display: grid;
-    gap: clamp(0.7rem, 0.6rem + 0.5vw, 1rem);
+    gap: var(--fall);
   }
+  /* The wires are drawn in the SVG's own square space, which has no meaning
+     down a column; the plates carry their own connectors here instead. */
   .pulse-svg { display: none; }
+
+  .pulse-core {
+    position: relative;
+    left: auto;
+    top: auto;
+    order: -1;
+    width: 8.25rem;
+    aspect-ratio: 1;
+    margin: 0;
+    padding: 0;
+    transform: none;
+    justify-self: center;
+    border-radius: 50%;
+    font-size: 1.05rem;
+    box-shadow: 0 0 2.5rem rgba(87, 201, 232, 0.35);
+  }
+  /* The desktop rings live in the hidden SVG, so the core grows its own pair. */
+  .pulse-core::before,
+  .pulse-core::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+    animation: pulse-halo 3.6s ease-out infinite;
+  }
+  .pulse-core::after { animation-delay: 1.8s; }
+
   .pulse-card {
-    position: static;
+    position: relative;
+    left: auto;
+    top: auto;
     width: auto;
     padding: 1.15rem 1.35rem;
     transform: none;
@@ -1338,27 +1387,77 @@ strong { font-weight: 650; }
   .pulse-mark { width: 20px; height: 20px; margin: 0 0 0.5rem; }
   .pulse-card h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
   .pulse-card p { font-size: 0.92rem; }
-  .pulse-core {
-    position: static;
-    order: -1;
-    width: auto;
-    aspect-ratio: auto;
-    transform: none;
-    justify-self: center;
-    padding: 0.6rem 1.6rem;
-    border-radius: 999px;
-    font-size: 1.1rem;
-    box-shadow: 0 0 2.5rem rgba(87, 201, 232, 0.3);
+
+  /* The channel the bead falls down. Two background layers: the bead, which
+     moves, and the hairline it follows, which does not. The box is wider than
+     the hairline because a 2px box would clip the bead to a sliver. */
+  .pulse-card::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    width: 14px;
+    height: var(--fall);
+    transform: translateX(-50%);
+    background-image:
+      radial-gradient(circle at 50% 50%, var(--c) 0 34%, transparent 56%),
+      linear-gradient(rgba(143, 176, 255, 0.3), rgba(143, 176, 255, 0.3));
+    background-repeat: no-repeat;
+    background-size: 14px 14px, 2px 100%;
+    background-position: 50% -14px, 50% 0;
+    animation: pulse-fall 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
+  /* Where the bead lands: a node on the plate's own edge that flares as it
+     arrives, so each finding is delivered rather than merely listed. */
+  .pulse-card::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -6px;
+    width: 11px;
+    height: 11px;
+    margin-left: -5.5px;
+    border-radius: 50%;
+    background: var(--c);
+    animation: pulse-land 2.8s linear infinite;
+  }
+
+  /* Same stagger as the desktop beads, so the signal reads as one thing
+     working its way down rather than four blinking independently. */
+  .pulse-card--upgrade::before,
+  .pulse-card--upgrade::after { animation-delay: 0.7s; }
+  .pulse-card--prospects::before,
+  .pulse-card--prospects::after { animation-delay: 1.4s; }
+  .pulse-card--risk::before,
+  .pulse-card--risk::after { animation-delay: 2.1s; }
 }
 
-/* The motion is decorative: with it off, the beads simply sit on the core's
-   edge and one ring stays faintly drawn. Nothing here is load-bearing. */
+@keyframes pulse-halo {
+  0%   { transform: scale(1);    opacity: 0.45; }
+  100% { transform: scale(1.85); opacity: 0; }
+}
+@keyframes pulse-fall {
+  0%   { background-position: 50% -14px, 50% 0; }
+  32%  { background-position: 50% calc(100% + 14px), 50% 0; }
+  100% { background-position: 50% calc(100% + 14px), 50% 0; }
+}
+@keyframes pulse-land {
+  0%, 26%, 46%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+  34%                { box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.16); }
+}
+
+/* The motion is decorative at both sizes: with it off, the beads rest on the
+   core's edge, one ring stays faintly drawn, and on a phone the channel keeps
+   its hairline and its node. Nothing here is load-bearing. */
 @media (prefers-reduced-motion: reduce) {
   .pulse-svg .bead { animation: none; opacity: 1; }
   .pulse-svg .ping { animation: none; opacity: 0.22; }
   .pulse-svg .ping:nth-of-type(2),
   .pulse-svg .ping:nth-of-type(3) { display: none; }
+  .pulse-core::before { animation: none; opacity: 0.35; }
+  .pulse-core::after { display: none; }
+  .pulse-card::before { animation: none; background-position: 50% 45%, 50% 0; }
+  .pulse-card::after { animation: none; }
 }
 
 /* --------------------------------------------------------------------------
