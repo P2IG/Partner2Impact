@@ -160,6 +160,11 @@ strong { font-weight: 650; }
 
 .section-head { max-width: 46rem; margin-bottom: clamp(2.25rem, 1.5rem + 2.5vw, 3.5rem); }
 .section-head--center { margin-inline: auto; text-align: center; }
+/* "Knowing who to ask is only half the work" is meant to sit on one line. The
+   default 46rem head forces it to wrap, so this section gets a wider measure
+   and lets text-wrap: balance keep it whole until the screen genuinely can't
+   hold it — a nowrap would have overflowed the phone instead. */
+.section-head--wide { max-width: 58rem; }
 .section-head p { color: var(--slate-500); font-size: 1.08em; }
 .section--ink .section-head p { color: rgba(226, 232, 240, 0.8); }
 
@@ -266,6 +271,13 @@ strong { font-weight: 650; }
   font-size: 0.95rem;
   text-decoration: none;
   color: var(--teal);
+}
+/* Tracey asked for this one to be larger and bold: at 0.95rem it read as a
+   footnote under the cards, and it is the way through to the whole page. */
+.text-link--lead {
+  font-size: clamp(1.05rem, 0.98rem + 0.4vw, 1.25rem);
+  font-weight: 700;
+  gap: 0.55rem;
 }
 .text-link::after { content: "→"; transition: transform 0.2s var(--ease); }
 .text-link:hover::after { transform: translateX(4px); }
@@ -878,6 +890,15 @@ strong { font-weight: 650; }
   margin-bottom: 0.4rem;
 }
 .stat .l { font-size: 0.88rem; color: var(--slate-500); line-height: 1.45; }
+.section--ink .card h3 { color: var(--ink); }
+.section--ink .card p { color: var(--slate-500); }
+.section--ink .card { border-color: transparent; box-shadow: 0 18px 40px rgba(3, 15, 43, 0.35); }
+.section--ink .card:hover { border-color: transparent; box-shadow: 0 26px 56px rgba(3, 15, 43, 0.45); }
+.section--ink .reach-cta { border-top-color: rgba(255, 255, 255, 0.16); }
+.section--ink .reach-cta p { color: #fff; }
+.section--ink .text-link { color: var(--teal-400); }
+.section--ink .text-link:hover { color: #ffffff; }
+
 .section--ink .stats { background: rgba(255, 255, 255, 0.14); border-color: rgba(255, 255, 255, 0.14); }
 .section--ink .stat { background: rgba(255, 255, 255, 0.04); }
 .section--ink .stat .n { color: #fff; }
