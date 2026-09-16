@@ -29,6 +29,12 @@
      is opened during parse rather than after the first request needs it. -->
 <link rel="preconnect" href="https://assets.calendly.com" crossorigin>
 <link rel="preconnect" href="https://calendly.com">
+<!-- The widget script is discovered late otherwise: it sits halfway down the
+     body, after the hero, so the browser only starts fetching it once the
+     parser gets there. Preloading from the head starts that fetch with the
+     page itself. The calendar's own app still boots inside the iframe after
+     that, and nothing on this side speeds that part up. -->
+<link rel="preload" href="https://assets.calendly.com/assets/external/widget.js" as="script" fetchpriority="high">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -103,7 +109,7 @@
              to boot — and the first version said "could not load" for all of them. It
              turns into a real error only if the iframe never arrives. -->
         <div class="calendly-inline-widget"
-             data-url="https://calendly.com/tracey-generedge/new-meeting"
+             data-url="https://calendly.com/tracey-generedge/new-meeting?hide_gdpr_banner=1"
              style="min-width:320px;height:700px;">
           <p class="scheduler-fallback" data-scheduler-status>
             <span class="scheduler-spinner" aria-hidden="true"></span>
