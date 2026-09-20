@@ -1300,14 +1300,62 @@ strong { font-weight: 650; }
    going ragged as the panel narrows.
    -------------------------------------------------------------------------- */
 
-/* A second header under the h2 rather than a tagline, so it carries weight of
-   its own. Sized between h2 and h3: clearly subordinate, clearly a heading. */
-.crm-standfirst {
-  font-size: clamp(1.35rem, 1.1rem + 1.15vw, 2rem);
-  font-weight: 700;
-  letter-spacing: -0.018em;
-  color: var(--ink);
+/* DATA — your key driver — to decide, to pivot. Tracey's 9/17 graphic, in
+   place of the standfirst she struck. The word flashes: a colour pulse from
+   navy to teal with a soft glow, rather than a blink, which reads as a beacon
+   instead of a fault. Two arrows leave the word and land on the two ends. */
+.driver {
+  display: grid;
+  justify-items: center;
+  width: min(100%, 22rem);
+  margin: clamp(1.25rem, 1rem + 1vw, 1.75rem) auto 0;
+  text-align: center;
+}
+.driver-word {
   margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.6rem, 2rem + 3vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: 0.12em;
+  color: var(--navy);
+  animation: driver-flash 2.6s ease-in-out infinite;
+}
+@keyframes driver-flash {
+  0%, 100% { color: var(--navy); text-shadow: 0 0 0 rgba(14, 134, 176, 0); transform: scale(1); }
+  50%      { color: var(--teal); text-shadow: 0 0 24px rgba(14, 134, 176, 0.45); transform: scale(1.03); }
+}
+.driver-sub {
+  margin: 0.4rem 0 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--amber-600);
+}
+.driver-arrows { width: min(100%, 15rem); height: auto; margin-top: 0.35rem; overflow: visible; }
+.driver-arrows path { fill: none; stroke: var(--teal); stroke-width: 2; stroke-linecap: round; }
+.driver-arrows marker path { fill: var(--teal); stroke: none; }
+.driver-ends {
+  display: flex;
+  justify-content: space-between;
+  width: min(100%, 17rem);
+  margin: 0.1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.driver-ends li {
+  margin: 0;
+  padding: 0.42rem 1rem;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+@media (prefers-reduced-motion: reduce) {
+  .driver-word { animation: none; }
 }
 
 /* Centred under a centred heading. The left teal rule this used to carry read
@@ -1323,7 +1371,14 @@ strong { font-weight: 650; }
   text-align: center;
   text-wrap: pretty;
 }
-.crm-lead strong { color: var(--ink); font-weight: 700; }
+/* The closing claim on a line of its own, as the 9/17 doc asks: bold, set to
+   the same measure, and short enough to hold one line at desktop. */
+.crm-lead--claim {
+  margin-top: 0.65rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-wrap: balance;
+}
 
 .section-head--tight { margin-bottom: 0; }
 
