@@ -78,7 +78,7 @@
         <img src="assets/img/stock-community-1200.webp"
              srcset="assets/img/stock-community-800.webp 800w, assets/img/stock-community-1200.webp 1200w"
              sizes="(max-width: 800px) 100vw, 40vw"
-             width="1200" height="1500" loading="lazy" decoding="async"
+             width="1200" height="1500" loading="eager" fetchpriority="high" decoding="async"
              alt="Volunteer talking with an older woman at a community market">
       </div>
       </div>
@@ -94,9 +94,11 @@
             <img src="assets/img/david-640.webp" width="640" height="640" loading="lazy" decoding="async"
                  alt="Portrait of David Galvin">
           </div>
-          <div>
+          <div class="person-head">
             <h3>David Galvin</h3>
             <span class="role">Decision Intelligence Lead</span>
+          </div>
+          <div class="person-body">
             <p class="person-quote">
               “When you apply predictive modeling to nonprofit datasets, patterns emerge
               immediately. We show you the story your data is desperately trying to tell.”
@@ -123,9 +125,11 @@
             <img src="assets/img/tracey-640.webp" width="640" height="640" loading="lazy" decoding="async"
                  alt="Portrait of Tracey Wiseman">
           </div>
-          <div>
+          <div class="person-head">
             <h3>Tracey Wiseman</h3>
             <span class="role">Strategic fundraising leader</span>
+          </div>
+          <div class="person-body">
             <p class="person-quote">
               “Fundraising is ultimately about human connection. Data doesn’t replace the
               relationship — it illuminates where the relationship needs to go next.”
