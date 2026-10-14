@@ -793,6 +793,23 @@ strong { font-weight: 650; }
   color: var(--slate-700);
 }
 
+/* Interior heroes carry a photograph beside the words. Stock from Unsplash,
+   cropped to a fixed ratio so the column holds its shape while the image
+   loads; the About portrait runs taller because that hero's headline does. */
+.page-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: clamp(2rem, 1rem + 4vw, 4rem);
+  align-items: center;
+}
+.page-hero__media img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.page-hero__media--tall img { aspect-ratio: 4 / 5; }
+@media (max-width: 800px) {
+  .page-hero__grid { grid-template-columns: 1fr; gap: 1.75rem; }
+  .page-hero__media img { aspect-ratio: 16 / 10; }
+  .page-hero__media--tall img { aspect-ratio: 4 / 3; }
+}
+
 .breadcrumb {
   display: flex; gap: 0.5rem; align-items: center;
   list-style: none; margin: 0 0 1.15rem; padding: 0;
@@ -892,6 +909,10 @@ strong { font-weight: 650; }
 /* "Our Full-Service Execution Suite" is a list of five services. As plain
    bullets it is the wall of text Eduardo asked to avoid; as a checklist of
    white rows it reads as a menu, which is what it is. */
+/* The section opens as a photo-and-words pair rather than a centred head. */
+.spectrum-intro { margin-bottom: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem); }
+.spectrum-intro .section-head { margin-bottom: 0; max-width: none; }
+.spectrum-intro .split-media img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
 .spectrum-split { margin-top: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem); }
 .spectrum-split > div { align-self: start; }
 .spectrum-split h3 { margin-bottom: 0.6rem; }

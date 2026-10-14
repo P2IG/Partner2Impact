@@ -93,6 +93,14 @@ for (const name of PAGES) {
        and puts it in the location instead, so the host has to come from there. */
     const isNetwork = /Failed to load resource|net::ERR_/.test(text);
     if (isNetwork && !ownOrigin(m.location()?.url)) return;
+    /* Chromium's permissions-policy notice: an embedded third-party frame (the
+       Calendly booking page on /contact) asked for a feature — payment — that
+       the document's policy does not grant. The site never calls that API, a
+       static host cannot set the header that would grant it, and the notice
+       only appeared once the embed resolved to a real booking page. Dropped
+       for the same reason as a foreign CDN's network failure: it is not this
+       site's bug and nothing here can change it. Anything else still counts. */
+    if (/Potential permissions policy violation/.test(text)) return;
     errors.push(`${name}: ${text}${isNetwork ? ` (${m.location()?.url})` : ''}`);
   });
   page.on('requestfailed', r => {
@@ -108,6 +116,14 @@ for (const name of PAGES) {
      audit sees the finished page rather than a blank one. */
   await page.evaluate(() => document.querySelectorAll('[data-reveal]')
     .forEach(e => e.classList.add('is-visible')));
+  /* The site moves: reveal transitions, the pulse beads, the DATA flash, the
+     glow on the hyper-targeting link. A screenshot taken mid-frame samples a
+     half-faded colour and reports a failure no reader would see for longer
+     than a tick — slate-500 on the feature cards measured 4.11:1 once, where
+     the resting colours give 5.67:1. The audit is about the resting state,
+     so everything is frozen before anything is measured. */
+  await page.addStyleTag({ content:
+    '*,*::before,*::after{animation:none!important;transition:none!important}' });
   await page.waitForTimeout(350);
 
   for (const w of WIDTHS) {
@@ -189,8 +205,13 @@ for (const name of PAGES) {
                cs.visibility !== 'hidden' && parseFloat(cs.opacity) > 0;
       })
       .map(el => {
-        const r = el.getBoundingClientRect();
-        return { x: r.left + scrollX, y: r.top + scrollY, w: r.width, h: r.height };
+        /* Padded past the box: the booking link casts a 26px shadow, and a
+           sample point just below its edge measured that shadow's tint on a
+           white card as 4.11:1 — the overlay's shadow, not the page. The box
+           alone had excluded the button and kept the halo. */
+        const r = el.getBoundingClientRect(), pad = 32;
+        return { x: r.left + scrollX - pad, y: r.top + scrollY - pad,
+                 w: r.width + pad * 2, h: r.height + pad * 2 };
       })
       .filter(r => r.w > 0 && r.h > 0));
 
