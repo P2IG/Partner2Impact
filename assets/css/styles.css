@@ -2572,4 +2572,12 @@ strong { font-weight: 650; }
    head that holds it, so centring it inside a left-aligned head pushed it
    16px right of the heading it sits under. */
 .section-head--center .section-head__lead { margin-inline: auto; }
+/* "Data + Strategy" lead: Tracey wants each sentence on its own line, so the
+   size steps down on phones until "Strategy without data is just guesswork."
+   fits across one row. */
+.lead-lines { max-width: none; }
+.lead-lines span { display: block; }
+@media (max-width: 480px) {
+  .section-head .section-head__lead.lead-lines { font-size: clamp(0.95rem, 4.55vw, 1.25rem); line-height: 1.4; }
+}
 .section--ink .section-head .section-head__lead { color: #fff; }
